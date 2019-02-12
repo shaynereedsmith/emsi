@@ -1,6 +1,7 @@
 'use strict'
 
-console.log('test');
+var Chart = require('chart.js');
+var myChart = new Chart(ctx, {...});
 
 var loadConfiguration = function() {
 
@@ -14,12 +15,8 @@ var loadConfiguration = function() {
       console.log(data);
       return data;
     },
-    error:  function() {
-      console.log('error');
-    }
+
   });
 }
-
-//git test
 
 window.onload = loadConfiguration;
