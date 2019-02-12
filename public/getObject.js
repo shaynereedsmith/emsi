@@ -20,4 +20,6 @@ var loadConfiguration = function() {
   });
 }
 
+//git test
+
 window.onload = loadConfiguration;
