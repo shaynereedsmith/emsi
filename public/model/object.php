@@ -1,5 +1,6 @@
 <?php
 
+// Object class
 class Object {
 
   var $object;
@@ -10,15 +11,18 @@ class Object {
     $this->object = $this->get_object();
   }
 
+  // Get object from api
   public function get_object() {
     $result = array();
     return $result = json_decode(file_get_contents($this->url));
   }
 
+  // Calculate percentage between values
   public function calculate_percentage($nat_average, $reg_average) {
     return round($reg_average / $nat_average * 100,0);
   }
 
+  // Determine weather value is positive or negative
   public function above_below($num) {
     if (strpos($num, '-')) {
       // is below
@@ -28,6 +32,7 @@ class Object {
     }
   }
 
+  // Get icon based on region type
   public function get_icon($key) {
     switch ($key) {
       case 'regional':

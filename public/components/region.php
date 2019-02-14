@@ -8,6 +8,7 @@
       <th>% Change</th>
     </tr>
     <?php
+
       $arr = (array) $object->object->trend_comparison;
 
       foreach ($arr as $key => $value) {

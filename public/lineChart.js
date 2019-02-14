@@ -2,9 +2,11 @@
 
 $(document).ready(function(){
 
+  // Get canvas element
   var chart = $('#lineChart');
 
   var loadLineChart = function() {
+
     // Get object from API
     var url = 'http://www.mocky.io/v2/5a29b5672e00004a3ca09d33';
 
@@ -12,21 +14,25 @@ $(document).ready(function(){
       dataType: 'jsonp',
       url: url,
       success: function(data) {
-        //DATA
 
+        // Get start and end years
         var start = data.trend_comparison.start_year;
         var end = data.trend_comparison.end_year
 
-        var range = Array(end - start + 1).fill().map((_, idx) => start + idx)
+        // Build range of years
+        var range = Array(end - start + 1).fill().map((_, idx) => start + idx);
 
+        // Calculate percentage of change
         var regionalData = percentChange(data.trend_comparison.regional);
         var nationalData = percentChange(data.trend_comparison.nation);
         var stateData = percentChange(data.trend_comparison.state);
 
+        // Chart object
         let lineChart = new Chart(chart, {
-          // The type of chart we want to create
 
+          // The type of chart we want to create
           type: 'line',
+
           // The data for our dataset
           data: {
             labels: range,
@@ -81,8 +87,8 @@ $(document).ready(function(){
 
   }
 
+  // Function to create percentage of change between data items
   function percentChange (oldArr) {
-
     var newArr = [0];
     for (var i = 0; i < oldArr.length - 1; i++) {
       var x = oldArr[i+1] - oldArr[i];
@@ -91,6 +97,7 @@ $(document).ready(function(){
     return newArr;
   }
 
+  // Instatiate chart
   loadLineChart();
 
 });
