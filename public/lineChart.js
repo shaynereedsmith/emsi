@@ -13,7 +13,8 @@ $(document).ready(function(){
       url: url,
       success: function(data) {
         //DATA
-        console.log(data.trend_comparison.start_year);
+
+        // console.log(data.trend_comparison.regional);
 
         var start = data.trend_comparison.start_year;
         var end = data.trend_comparison.end_year
@@ -26,20 +27,55 @@ $(document).ready(function(){
           // The type of chart we want to create
 
           type: 'line',
-
           // The data for our dataset
           data: {
             labels: range,
+            aspectRatio: 5,
             datasets: [{
-              label: "My First dataset",
+              label: 'Regional',
+              fill: false,
               backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: [0, 10, 5, 2, 20, 30, 45],
+              borderColor: 'black',
+              lineTension: 0,
+              pointRadius: 7,
+              pointBackgroundColor: 'black',
+              pointBorderColor: 'white',
+              pointBorderWidth: 2,
+              data: data.trend_comparison.regional,
+            },
+            {
+              label: 'State',
+              fill: false,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'skyblue',
+              lineTension: 0,
+              pointStyle: 'rect',
+              pointRadius: 7,
+              pointBackgroundColor: 'skyblue',
+              pointBorderColor: 'white',
+              pointBorderWidth: 2,
+              data: data.trend_comparison.state,
+            },
+            {
+              label: 'Nation',
+              fill: false,
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'lightblue',
+              lineTension: 0,
+              pointStyle: 'triangle',
+              pointRadius: 7,
+              pointBackgroundColor: 'lightblue',
+              pointBorderColor: 'white',
+              pointBorderWidth: 2,
+              data: data.trend_comparison.nation,
             }]
           },
 
           // Configuration options go here
-          options: {}
+          options: {
+            responsive:true,
+            maintainAspectRatio: false,
+          }
         });
       },
 
