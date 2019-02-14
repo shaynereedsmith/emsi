@@ -6,11 +6,12 @@ body {
 
 h1 {
   font-weight: bold;
-  font-size: 1.2em;
+  padding: 0.5em 0;
+  font-size: 1.5em;
 }
 
 .headline {
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 
 h2 {
