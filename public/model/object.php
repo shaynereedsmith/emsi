@@ -15,22 +15,33 @@ class Object {
     return $result = json_decode(file_get_contents($this->url));
   }
 
-  public function calculatePercentage($oldFigure, $newFigure) {
-    if (($oldFigure != 0) && ($newFigure != 0)) {
-        $percentChange = (1 - $oldFigure / $newFigure) * 100;
-    }
-    else {
-        $percentChange = null;
-    }
-    return round($percentChange,0);
+  public function calculate_percentage($nat_average, $reg_average) {
+    return round($reg_average / $nat_average * 100,0);
   }
 
-  public function aboveBelow($num) {
+  public function above_below($num) {
     if (strpos($num, '-')) {
       // is below
       return 'below';
     }else{
       return 'above';
+    }
+  }
+
+  public function get_icon($key) {
+    switch ($key) {
+      case 'regional':
+        return '<span style="display: inline-block; padding: 0.5em 0; color:black; margin-right: 1em;"><i class="fas fa-circle"></i></span>';
+        break;
+      case 'state':
+        return '<span style="display: inline-block; padding: 0.5em 0; color:skyblue; margin-right: 1em;"><i class="fas fa-square-full"></i></span>';
+        break;
+      case 'nation':
+        return '<span style="display: inline-block; padding: 0.5em 0; color:lightblue; margin-right: 1em;"><i class="fas fa-exclamation-triangle"></i></span>';
+        break;
+      default:
+        return '<span style="display: inline-block; padding: 0.5em 0; color:white; margin-right: 1em;"><i class="fas fa-circle"></i></span>';
+        break;
     }
   }
 

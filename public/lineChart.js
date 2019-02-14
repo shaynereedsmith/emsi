@@ -21,7 +21,21 @@ $(document).ready(function(){
 
         var range = Array(end - start + 1).fill().map((_, idx) => start + idx)
 
-        console.log(data);
+        var regionalData = percentChange(data.trend_comparison.regional);
+        var nationalData = percentChange(data.trend_comparison.nation);
+        var stateData = percentChange(data.trend_comparison.state);
+
+        console.log(data.trend_comparison.state,stateData);
+        // console.log(regionalData,nationalData,stateData);
+        // var arr = [];
+        // for (var i = 0; i < data.trend_comparison.nation.length - 1; i++) {
+        //   var x = data.trend_comparison.nation[i+1] - data.trend_comparison.nation[i];
+        //   arr.push(data.trend_comparison.nation[i] / x);
+        // }
+
+        // var regionalData = Object.keys(data.trend_comparison.nation).forEach(function(key) {
+        //   console.log(data.trend_comparison.nation[key],data.trend_comparison.nation[key + 1]);
+        // });
 
         let lineChart = new Chart(chart, {
           // The type of chart we want to create
@@ -41,7 +55,7 @@ $(document).ready(function(){
               pointBackgroundColor: 'black',
               pointBorderColor: 'white',
               pointBorderWidth: 2,
-              data: data.trend_comparison.regional,
+              data: regionalData,
             },
             {
               label: 'State',
@@ -54,7 +68,7 @@ $(document).ready(function(){
               pointBackgroundColor: 'skyblue',
               pointBorderColor: 'white',
               pointBorderWidth: 2,
-              data: data.trend_comparison.state,
+              data: stateData,
             },
             {
               label: 'Nation',
@@ -67,7 +81,7 @@ $(document).ready(function(){
               pointBackgroundColor: 'lightblue',
               pointBorderColor: 'white',
               pointBorderWidth: 2,
-              data: data.trend_comparison.nation,
+              data: nationalData,
             }]
           },
 
@@ -81,6 +95,16 @@ $(document).ready(function(){
 
     });
 
+  }
+
+  function percentChange (oldArr) {
+
+    var newArr = [0];
+    for (var i = 0; i < oldArr.length - 1; i++) {
+      var x = oldArr[i+1] - oldArr[i];
+      newArr.push(Math.round(oldArr[i] / x));
+    }
+    return newArr;
   }
 
   loadLineChart();
